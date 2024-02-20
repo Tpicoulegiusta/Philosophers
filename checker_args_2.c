@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:35:26 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/19 16:57:49 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:41:30 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ long int	actual_time_ms(void)
 	gettimeofday(&timeval, NULL);
 	time_ms = (timeval.tv_sec * 1000) + (timeval.tv_usec / 1000);
 	return (time_ms);
+}
+
+void ft_usleep()
+{
+	
 }
