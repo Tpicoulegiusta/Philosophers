@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:44 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/19 17:36:58 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:35:21 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_init(t_all *all)
 {
+	all->is_sim = 1;
 	pthread_mutex_init(&all->data.mutex, NULL);
     ft_thread_philo(all);
     pthread_mutex_destroy(&all->data.mutex);
@@ -33,8 +34,9 @@ int main(int argc, char **argv)
 	ft_init(&all);
 	while(1)
 	{
-		//check mort
-		//mort = temps actuel - temps du last meal
-		
+        if (ft_check_death(all) != 0)
+			break;
 	}
+    printf("%d\n",all.is_sim);
+	return(0);
 }
