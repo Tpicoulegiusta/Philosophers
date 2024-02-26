@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_args_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommi <tommi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:35:26 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/20 17:41:30 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:42:42 by tommi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ long int	actual_time_ms(void)
 	return (time_ms);
 }
 
-void ft_usleep()
+void ft_usleep(int time)
 {
-	
+	long int	start;
+
+	start = actual_time_ms() + time;
+	while(start > actual_time_ms())
+		usleep(1);
 }

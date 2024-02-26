@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommi <tommi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/20 17:40:44 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:44:35 by tommi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ typedef struct s_data
 	int	tdie;
 	int	tslp;
 	int	meat;
-	pthread_mutex_t	mutex;
 	long int	start_time;
+	pthread_mutex_t	mutex;
+	pthread_mutex_t	mutex_eat;
 	//tab [12123] [123123] [123123] [123123]
 }	t_data;
 
@@ -38,7 +39,7 @@ typedef	struct	s_ph
 	int			done;
 	long int	tab_lmeal;
 	pthread_mutex_t	left_fork;
-	pthread_mutex_t	*right_fork;
+	//pthread_mutex_t	*right_fork;
 	pthread_t	philo_thread;
 }	t_ph;
 
@@ -59,6 +60,9 @@ void	routine(t_all *all);
 void	ft_init(t_all *all);
 long int	actual_time_ms(void);
 int	ft_check_death(t_all all);
+void ft_usleep(int time);
+void lil_check(t_all all, int id);
+void	ft_drop_fork(t_all all, int id);
 
 
 #endif

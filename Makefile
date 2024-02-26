@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+         #
+#    By: tommi <tommi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:07:49 by tpicoule          #+#    #+#              #
-#    Updated: 2024/02/16 14:03:18 by tpicoule         ###   ########.fr        #
+#    Updated: 2024/02/23 16:48:46 by tommi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SOURCES		= philo.c \
 			philo_utils.c
 OBJECTS		= ${SOURCES:.c=.o}
 RM			= rm -f
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CC			= cc
+FLAGS		= -Wall -Wextra -Werror
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
