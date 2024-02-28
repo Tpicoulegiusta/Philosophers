@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_args_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommi <tommi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:35:26 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/22 11:42:42 by tommi            ###   ########.fr       */
+/*   Updated: 2024/02/28 10:09:08 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int check_args_2(char **argv, t_all *all)
 		all->data.tslp = ft_atoi(argv[4]);
 		if (argv[5])
 			all->data.meat = ft_atoi(argv[5]);
+		else
+			all->data.meat = -1;
 		if (all->data.nb_philo <= 0 || all->data.tdie <= 0 
 		|| all->data.teat <= 0 || all->data.tslp <= 0 )
 			return(1);

@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/26 16:15:10 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:14:48 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void	ft_thread_philo(t_all *all);
 void	routine(t_all *all);
 void	ft_init(t_all *all);
 long int	actual_time_ms(void);
-int	ft_check_death(t_all all);
+int			ft_check_death(t_all *all);
 void ft_usleep(int time);
 void lil_check(t_all all, int id);
-void	ft_drop_fork(t_all all, int id);
-void	ft_print(t_all all, int id, char *str);
+void	ft_drop_fork(t_all *all, int id);
+void	ft_print(t_all *all, int id, char *str);
+//int	ft_check_eat(t_all all, int argc);
 
 
 #endif

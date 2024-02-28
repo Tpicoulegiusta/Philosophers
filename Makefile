@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tommi <tommi@student.42.fr>                +#+  +:+       +#+         #
+#    By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:07:49 by tpicoule          #+#    #+#              #
-#    Updated: 2024/02/23 16:48:46 by tommi            ###   ########.fr        #
+#    Updated: 2024/02/28 10:15:37 by tpicoule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ SOURCES		= philo.c \
 OBJECTS		= ${SOURCES:.c=.o}
 RM			= rm -f
 CC			= cc
-FLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJECTS}
-	${CC} ${CFLAGS} ${MLX} ${OBJECTS} -o ${NAME}
+	${CC} ${CFLAGS} ${OBJECTS} -o ${NAME}
 
 all:		${NAME}
 
