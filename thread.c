@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:44:14 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/28 14:16:03 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:58:08 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,30 @@ void	ft_print(t_all *all, int id, char *str)
 
 void	ft_take_fork(t_all *all, int id)
 {
-	pthread_mutex_lock(&all->philos[id].left_fork);
-	ft_print(all, id, "has taken a fork");
-	pthread_mutex_lock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
-	ft_print(all, id, "has taken a fork");
+	if ((all->data.nb_philo % 2 && id > 0) || (all->data.nb_philo > 0 && id % 2))
+	{
+		pthread_mutex_lock(&all->philos[id].left_fork);
+		ft_print(all, id, "has taken a fork");
+		pthread_mutex_lock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
+		ft_print(all, id, "has taken a fork");
+		return ;
+	}
+		pthread_mutex_lock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
+		ft_print(all, id, "has taken a fork");
+		pthread_mutex_lock(&all->philos[id].left_fork);
+		ft_print(all, id, "has taken a fork");
 }
 
 void	ft_drop_fork(t_all *all, int id)
 {
-	pthread_mutex_unlock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
-	pthread_mutex_unlock(&all->philos[id].left_fork);
+	if ((all->data.nb_philo % 2 && id > 0) || (all->data.nb_philo > 0 && id % 2))
+	{
+		pthread_mutex_unlock(&all->philos[id].left_fork);
+		pthread_mutex_unlock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
+		return ;
+	}
+		pthread_mutex_unlock(&all->philos[id].left_fork);
+		pthread_mutex_unlock(&all->philos[(id + 1)].left_fork);
 }
 
 void	ft_eat(t_all *all, int id)
@@ -82,7 +96,7 @@ int	ft_check_death(t_all *all)
 		pthread_mutex_lock(&all->data.mutex_print);
 		all->is_sim = 0;
 		pthread_mutex_unlock(&all->data.mutex_print);
-		printf("Ils ont magnged/n\n");
+		printf("Ils ont manged/n\n");
 		return (1);
 	}
 	return (0);
