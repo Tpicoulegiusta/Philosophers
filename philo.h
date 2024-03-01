@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/28 14:08:55 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:15:15 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ void		ft_usleep(int time);
 void		lil_check(t_all all, int id);
 void		ft_drop_fork(t_all *all, int id);
 void		ft_print(t_all *all, int id, char *str);
+void		ft_eat(t_all *all, int id);
+void		ft_take_fork(t_all *all, int id);
+void		ft_drop_fork(t_all *all, int id);
 
 #endif
