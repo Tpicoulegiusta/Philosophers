@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:44:14 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/03/01 11:23:02 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:41:50 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	ft_thread_philo(t_all *all)
 {
 	int	i;
 
-	i = 0;
 	all->data.start_time = actual_time_ms();
+	i = -1;
+	while (++i < all->data.nb_philo && all->data.nb_philo != 0)
+		pthread_mutex_init(&all->philos[i].left_fork, NULL);
+	i = 0;
 	while (i < all->data.nb_philo && all->data.nb_philo != 0)
 	{
 		all->philos[i].count_eat = 0;
 		all->philos[i].tab_lmeal = all->data.start_time;
-		pthread_mutex_init(&all->philos[i].left_fork, NULL);
 		pthread_create(&all->philos[i].philo_thread, NULL,
 			(void *) &routine, all);
 		i++;
@@ -34,8 +36,10 @@ void	routine(t_all *all)
 	static int	static_id;
 	int			id;
 
+	pthread_mutex_lock(&all->data.static_mutex);
 	id = static_id;
 	static_id++;
+	pthread_mutex_unlock(&all->data.static_mutex);
 	lil_check(*all, id);
 	while (1)
 	{
@@ -48,6 +52,9 @@ void	routine(t_all *all)
 		ft_usleep(all->data.tslp);
 		ft_print(all, id, "is thinking");
 	}
+	pthread_mutex_unlock(&all->data.mutex_print);
+	pthread_detach(all->philos[id].philo_thread);
+	printf("%d je suis mort lol\n", id);
 }
 
 void	ft_eat(t_all *all, int id)
@@ -55,10 +62,13 @@ void	ft_eat(t_all *all, int id)
 
 	ft_take_fork(all, id);
 	ft_print(all, id, "is eating");
+	pthread_mutex_lock(&all->data.tab_lmeal_mutex);
 	all->philos[id].tab_lmeal = actual_time_ms();
+	pthread_mutex_unlock(&all->data.tab_lmeal_mutex);
 	ft_usleep(all->data.teat);
 	ft_drop_fork(all, id);
-	all->philos[id].count_eat += 1;
+	if (all->philos[id].count_eat < all->data.meat)
+		all->philos[id].count_eat += 1;
 }
 
 void	ft_print(t_all *all, int id, char *str)
@@ -70,35 +80,6 @@ void	ft_print(t_all *all, int id, char *str)
 	pthread_mutex_unlock(&all->data.mutex_print);
 }
 
-// void	ft_take_fork(t_all *all, int id)
-// {
-// 	if ((all->data.nb_philo % 2 && id > 0) || (all->data.nb_philo > 0 && id % 2))
-// 	{
-// 		pthread_mutex_lock(&all->philos[id].left_fork);
-// 		ft_print(all, id, "has taken a fork");
-// 		pthread_mutex_lock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
-// 		ft_print(all, id, "has taken a fork");
-// 		return ;
-// 	}
-// 		pthread_mutex_lock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
-// 		ft_print(all, id, "has taken a fork");
-// 		pthread_mutex_lock(&all->philos[id].left_fork);
-// 		ft_print(all, id, "has taken a fork");
-// }
-
-// void	ft_drop_fork(t_all *all, int id)
-// {
-// 	if ((all->data.nb_philo % 2 && id > 0) || (all->data.nb_philo > 0 && id % 2))
-// 	{
-// 		pthread_mutex_unlock(&all->philos[id].left_fork);
-// 		pthread_mutex_unlock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);
-// 		return ;
-// 	}
-// 		pthread_mutex_unlock(&all->philos[id].left_fork);
-// 		pthread_mutex_unlock(&all->philos[(id + 1)].left_fork);
-// }
-
-
 void	lil_check(t_all all, int id)
 {
 	if (all.data.nb_philo != 1)
@@ -107,37 +88,3 @@ void	lil_check(t_all all, int id)
 			ft_usleep(60);
 	}
 }
-
-// int	ft_check_death(t_all *all)
-// {
-// 	int		i;
-// 	int		nb_eat;
-// 	long	diff;
-
-// 	i = 0;
-// 	nb_eat = 0;
-// 	while (i < all->data.nb_philo)
-// 	{
-// 		diff = actual_time_ms() - all->philos[i].tab_lmeal;
-// 		if (diff > all->data.tdie)
-// 		{
-// 			pthread_mutex_lock(&all->data.mutex_print);
-// 			all->is_sim = 0;
-// 			pthread_mutex_unlock(&all->data.mutex_print);
-// 			printf("ivan %d died at %ld\n", (i + 1), diff);
-// 			return (write(1, "death\n", 6), 1);
-// 		}
-// 		if (all->philos[i].count_eat == all->data.meat)
-// 			nb_eat++;
-// 		i++;
-// 	}
-// 	if (nb_eat >= all->data.nb_philo)
-// 	{
-// 		pthread_mutex_lock(&all->data.mutex_print);
-// 		all->is_sim = 0;
-// 		pthread_mutex_unlock(&all->data.mutex_print);
-// 		printf("Ils ont manged/n\n");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
