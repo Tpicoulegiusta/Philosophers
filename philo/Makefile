@@ -6,7 +6,7 @@
 #    By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:07:49 by tpicoule          #+#    #+#              #
-#    Updated: 2024/03/05 14:58:26 by tpicoule         ###   ########.fr        #
+#    Updated: 2024/03/05 16:18:35 by tpicoule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SOURCES		= philo.c \
 OBJECTS		= ${SOURCES:.c=.o}
 RM			= rm -f
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 #fsanitize=thread -g
+CFLAGS		= -Wall -Wextra -Werror #-g3 #fsanitize=thread -g
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
