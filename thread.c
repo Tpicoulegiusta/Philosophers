@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:44:14 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/20 15:46:23 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:22:08 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void routine(t_all *all)
 		printf("%ld Philo %d is eating\n", actual_time_ms() - all->data.start_time, id + 1);
 		usleep(all->data.teat * 1000);
 		all->philos[id].tab_lmeal = actual_time_ms();
+		printf("%ld Philo %d is sleeping\n", actual_time_ms() - all->data.start_time, id + 1);
+		usleep(all->data.tslp);
+		printf("%ld Philo %d is thinking\n", actual_time_ms() - all->data.start_time, id + 1);
 	}
 	//g fini
 
