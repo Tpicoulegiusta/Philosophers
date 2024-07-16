@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:44 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/26 16:15:01 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:15:04 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_init(t_all *all)
 {
+	pthread_mutex_lock(&all->data.mutex_print);
 	all->is_sim = 1;
+	pthread_mutex_unlock(&all->data.mutex_print);
 	pthread_mutex_init(&all->data.mutex_eat, NULL);
     ft_thread_philo(all);
     //pthread_mutex_destroy(&all->data.mutex);
@@ -37,8 +39,9 @@ int main(int argc, char **argv)
 	ft_init(&all);
 	while(1)
 	{
-        if (ft_check_death(all) != 0)
+        if (ft_check_death(&all) != 0)
 			break;
+            //fonction argv[5]
         ft_usleep(1);
 	}
     printf("%d\n",all.is_sim);
