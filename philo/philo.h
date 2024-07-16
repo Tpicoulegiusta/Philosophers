@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/03/01 16:47:09 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:21:26 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@
 
 typedef struct s_data
 {
-	int				nb_philo;
+	int				nb_ph;
 	int				teat;
 	int				tdie;
 	int				tslp;
 	int				meat;
-	long int		start_time;
+	long int		start_t;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	tab_lmeal_mutex;
 	pthread_mutex_t	static_mutex;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_count_eat;
 }	t_data;
 
 typedef struct s_ph
@@ -39,7 +40,7 @@ typedef struct s_ph
 	int				count_eat;
 	int				done;
 	long int		tab_lmeal;
-	pthread_mutex_t	left_fork;
+	pthread_mutex_t	l_fork;
 	pthread_t		philo_thread;
 }	t_ph;
 
@@ -68,6 +69,7 @@ void		ft_eat(t_all *all, int id);
 void		ft_take_fork(t_all *all, int id);
 void		ft_drop_fork(t_all *all, int id);
 void		destroy_all(t_all *all);
-int			ft_check_thread(t_all *all);
+void		ft_check_thread(t_all *all);
+void		ft_try(t_all *all, int id);
 
 #endif
