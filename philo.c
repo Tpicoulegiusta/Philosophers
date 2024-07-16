@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommi <tommi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:44 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/23 14:52:37 by tommi            ###   ########.fr       */
+/*   Updated: 2024/02/26 16:15:01 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main(int argc, char **argv)
 	{
         if (ft_check_death(all) != 0)
 			break;
+        ft_usleep(1);
 	}
     printf("%d\n",all.is_sim);
 	return(0);

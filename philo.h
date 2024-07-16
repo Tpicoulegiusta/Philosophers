@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommi <tommi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/02/23 16:44:35 by tommi            ###   ########.fr       */
+/*   Updated: 2024/02/26 16:15:10 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int	meat;
 	long int	start_time;
 	pthread_mutex_t	mutex;
+	pthread_mutex_t mutex_print;
 	pthread_mutex_t	mutex_eat;
 	//tab [12123] [123123] [123123] [123123]
 }	t_data;
@@ -63,6 +64,7 @@ int	ft_check_death(t_all all);
 void ft_usleep(int time);
 void lil_check(t_all all, int id);
 void	ft_drop_fork(t_all all, int id);
+void	ft_print(t_all all, int id, char *str);
 
 
 #endif
