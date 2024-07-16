@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:21:04 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/03/01 11:22:08 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:07:40 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_take_fork(t_all *all, int id)
 
 void	ft_drop_fork(t_all *all, int id)
 {
-	if ((all->data.nb_philo % 2 && id > 0) || (all->data.nb_philo > 0 && id % 2))
+	if ((all->data.nb_philo % 2 && id >= 0) || (all->data.nb_philo >= 0 && id % 2))
 	{
 		pthread_mutex_unlock(&all->philos[id].left_fork);
 		pthread_mutex_unlock(&all->philos[(id + 1) % all->data.nb_philo].left_fork);

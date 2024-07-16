@@ -6,7 +6,7 @@
 /*   By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:10:34 by tpicoule          #+#    #+#             */
-/*   Updated: 2024/03/01 11:15:15 by tpicoule         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:47:09 by tpicoule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_data
 	int				meat;
 	long int		start_time;
 	pthread_mutex_t	mutex;
+	pthread_mutex_t	tab_lmeal_mutex;
+	pthread_mutex_t	static_mutex;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_eat;
 }	t_data;
@@ -65,5 +67,7 @@ void		ft_print(t_all *all, int id, char *str);
 void		ft_eat(t_all *all, int id);
 void		ft_take_fork(t_all *all, int id);
 void		ft_drop_fork(t_all *all, int id);
+void		destroy_all(t_all *all);
+int			ft_check_thread(t_all *all);
 
 #endif

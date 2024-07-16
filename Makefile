@@ -6,7 +6,7 @@
 #    By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:07:49 by tpicoule          #+#    #+#              #
-#    Updated: 2024/03/01 11:23:25 by tpicoule         ###   ########.fr        #
+#    Updated: 2024/03/01 14:46:29 by tpicoule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,13 @@ SOURCES		= philo.c \
 			checker_args_2.c \
 			thread.c \
 			forks_utils.c \
-			philo_utils.c
+			philo_utils.c \
+			dest_init.c
+
 OBJECTS		= ${SOURCES:.c=.o}
 RM			= rm -f
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread -g
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
