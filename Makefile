@@ -6,7 +6,7 @@
 #    By: tpicoule <tpicoule@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:07:49 by tpicoule          #+#    #+#              #
-#    Updated: 2024/02/29 14:42:52 by tpicoule         ###   ########.fr        #
+#    Updated: 2024/03/01 11:23:25 by tpicoule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES		= philo.c \
 			checker_args.c \
 			checker_args_2.c \
 			thread.c \
+			forks_utils.c \
 			philo_utils.c
 OBJECTS		= ${SOURCES:.c=.o}
 RM			= rm -f
